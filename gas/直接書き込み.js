@@ -107,15 +107,15 @@ function generateDotArtWithResumeBackgroundOnly() {
   }
 
   // =================================================================
-  // 2. 100行ずつ分割して背景色のみを書き込むループ
+  // 2. chunkに分割して背景色のみを書き込むループ
   // =================================================================
-  const CHUNK_SIZE = 100; // 100行ずつ処理
+  const CHUNK_SIZE = 80;
 
   for (let r = startRow; r < numRows; r += CHUNK_SIZE) {
     const endRow = Math.min(r + CHUNK_SIZE, numRows);
     const apiRows = [];
 
-    // 100行分のデータを構築
+    // データを構築
     for (let current_r = r; current_r < endRow; current_r++) {
       const rowValues = [];
       for (let c = 0; c < numCols; c++) {
@@ -133,7 +133,7 @@ function generateDotArtWithResumeBackgroundOnly() {
       apiRows.push({ values: rowValues });
     }
 
-    // Sheets API（updateCells）で100行分を一撃書き込み
+    // Sheets API（updateCells）で1chunk分を一撃書き込み
     const requests = [{
       updateCells: {
         rows: apiRows,

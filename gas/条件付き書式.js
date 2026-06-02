@@ -123,15 +123,15 @@ function generateDotArtWithConditionalFormatting() {
   }
 
   // =================================================================
-  // 4. 100行ずつ分割して「数値（カラーID）」を書き込むループ
+  // 4. chunkに分割して「数値（カラーID）」を書き込むループ
   // =================================================================
-  const CHUNK_SIZE = 100; 
+  const CHUNK_SIZE = 80; 
 
   for (let r = startRow; r < numRows; r += CHUNK_SIZE) {
     const endRow = Math.min(r + CHUNK_SIZE, numRows);
     const valueGridChunk = [];
 
-    // 100行分の数値データを構築
+    // このchunkの数値データを構築
     for (let current_r = r; current_r < endRow; current_r++) {
       const valueRow = [];
       for (let c = 0; c < numCols; c++) {
